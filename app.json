@@ -2,7 +2,7 @@
   "name": "Haptava Heroku Example",
   "description": "A simple example of using Haptava with Heroku",
   "repository": "https://github.com/haptava/heroku-example",
-  "logo": "https://dl.dropboxusercontent.com/u/481551/haptava_logo.svg",
+  "logo": "https://dl.dropboxusercontent.com/u/481551/haptava/haptava_logo.svg",
   "keywords": [
     "haptava",
     "jmx",
