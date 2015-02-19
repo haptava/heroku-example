@@ -1,5 +1,14 @@
 # Heroku Example App
 
+## Contents
+
+ - [Overview](#overview)
+   - [Worker Dyno](#worker-dyno)
+   - [Web Dyno](#web-dyno)
+   - [Heroku Config Vars](#heroku-config-vars)
+ - [Deploy to Heroku](#deploy-to-heroku)
+ - [Running the App](#running-the-app)
+
 ## Overview
 This example is designed to run a single `worker` dyno and multiple `web` dynos.
 
