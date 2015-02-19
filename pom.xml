@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015 Paul Ambrose
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.haptava.examples</groupId>
+  <artifactId>heroku-example</artifactId>
+
+  <name>HaptavaHerokuExample</name>
+  <description>Haptava Heroku Example</description>
+  <version>1.0-SNAPSHOT</version>
+
+  <url>https://pambrose@github.com/haptava/heroku-example.git</url>
+
+  <properties>
+    <jdk.version>1.6</jdk.version>
+    <maven.compiler.version>3.2</maven.compiler.version>
+    <maven.build.timestamp.format>yyyy-MM-dd-HH:mm:ss</maven.build.timestamp.format>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <jetty.version>6.1.26</jetty.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <appassembler.version>1.9</appassembler.version>
+
+    <haptava.version>0.9.39-SNAPSHOT</haptava.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>haptava-snapshots</id>
+      <name>Haptava Snapshots</name>
+      <url>http://maven.haptava.io:8080/nexus/content/repositories/snapshots/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>io.haptava</groupId>
+      <artifactId>haptava-client</artifactId>
+      <version>${haptava.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <version>${jetty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.version}</version>
+        <configuration>
+          <optimize>true</optimize>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>${appassembler.version}</version>
+
+        <configuration>
+          <assembleDirectory>target</assembleDirectory>
+          <programs>
+            <program>
+              <mainClass>io.haptava.examples.heroku.PageServer</mainClass>
+              <name>PageServer</name>
+            </program>
+            <program>
+              <mainClass>io.haptava.examples.heroku.DynoWatcherServer</mainClass>
+              <name>DynoWatcherServer</name>
+            </program>
+          </programs>
+        </configuration>
+
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,26 @@
+{
+  "name": "Haptava Heroku Example",
+  "description": "A simple example of using Haptava with Heroku",
+  "repository": "https://github.com/haptava/heroku-example",
+  "keywords": [
+    "haptava",
+    "jmx",
+    "jmxtalk"
+  ],
+  "env": {
+    "HAPTAVA_USERNAME": {
+      "description": "Haptava username",
+      "value": "",
+      "required": true
+    },
+    "HAPTAVA_PASSWORD": {
+      "description": "Haptava password",
+      "value": "",
+      "required": true
+    },
+    "APPLICATION_ID": {
+      "description": "Generated value",
+      "generator": "secret"
+    }
+  }
+}
