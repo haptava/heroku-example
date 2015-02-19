@@ -44,7 +44,6 @@ The DynoWatcher also registers a
 * `HAPTAVA_USERNAME` and `HAPTAVA_PASSWORD` are used for credentials.  
 * `APPLICATION_ID` is a unique ID used to avoid collisions between users in the same user group.
 
-
 ## Deploy to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
@@ -52,7 +51,7 @@ The DynoWatcher also registers a
 The heroku-example requires a worker dyno to be running, but the
 [Deploy to Heroku][deploydocs] functionality does not allow
 worker dynos to be started automatically. So after [deploying][deploy]
-the heroku-example to your [Heroku][heroku] account, adjust the number of dynos
+the heroku-example app to your [Heroku][heroku] account, adjust the number of dynos
 manually:
 * Go to [Heroku Dashboard] [dashboard]
 * Go to your newly-deployed heroku-example application
@@ -71,9 +70,9 @@ Assuming you named your heroku-example app `foo`, you can reach your app at: `ht
 
 Click on the "Make Request" button to generate some random requests for the app.
 For each request you can see:
-* the MBeanServer and MBean invoked during the request
-* the web dyno that handled the request and a summary it recent requests
-* a summary of all the web dynos
+* The MBeanServer and MBean invoked during the request
+* The web dyno that handled the request and a summary it recent requests
+* A summary of all the web dynos
 
 You can modify the number of web dynos to any number greater than 0, but do not increase the number of
 worker dynos aboce 1.
