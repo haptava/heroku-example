@@ -432,13 +432,13 @@
     </library>
     <library name="Maven: io.haptava:sudothought-properties:0.9.39-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-20150219.012846-3.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-20150219.012846-3-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/io/haptava/sudothought-properties/0.9.39-SNAPSHOT/sudothought-properties-0.9.39-20150219.012846-3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: io.haptava:sudothought-utils:0.9.39-SNAPSHOT">

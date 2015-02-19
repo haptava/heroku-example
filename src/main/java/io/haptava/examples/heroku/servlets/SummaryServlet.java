@@ -47,10 +47,10 @@ public class SummaryServlet
     try {
       PrintWriter writer = response.getWriter();
       ServletContext servletContext = request.getSession().getServletContext();
-      MBeanServerAdminMXBean mbeanServerAdminProxy = (MBeanServerAdminMXBean) servletContext.getAttribute(MBEANSERVER_ADMIN_PROXY);
-      DynoWatcherMXBean dynoWatcherProxy = (DynoWatcherMXBean) servletContext.getAttribute(DYNO_WATCHER_MBEAN_PROXY);
       JmxProxy userGroupJmxProxy = (JmxProxy) servletContext.getAttribute(USERGROUP_JMX_PROXY);
       JmxProxy dynoWatcherJmxProxy = (JmxProxy) servletContext.getAttribute(DYNO_WATCHER_JMX_PROXY);
+      MBeanServerAdminMXBean mbeanServerAdminProxy = (MBeanServerAdminMXBean) servletContext.getAttribute(MBEANSERVER_ADMIN_PROXY);
+      DynoWatcherMXBean dynoWatcherProxy = (DynoWatcherMXBean) servletContext.getAttribute(DYNO_WATCHER_MBEAN_PROXY);
 
       if (mbeanServerAdminProxy == null) {
         writer.println("MBeanServerAdmin JmxProxy not available");
@@ -80,6 +80,7 @@ public class SummaryServlet
           writer.println("No web dynos registered");
         }
         else {
+          // Sort dynos with most recent activity first
           List<Dyno> sortedDynos =
               FluentIterable
                   .from(unsortedDynos)

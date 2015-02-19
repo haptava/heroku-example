@@ -17,7 +17,6 @@
   <url>https://pambrose@github.com/haptava/heroku-example.git</url>
 
   <properties>
-    <jdk.version>1.6</jdk.version>
     <maven.compiler.version>3.2</maven.compiler.version>
     <maven.build.timestamp.format>yyyy-MM-dd-HH:mm:ss</maven.build.timestamp.format>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

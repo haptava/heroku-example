@@ -48,8 +48,8 @@ public class DefaultServlet
 
       ServletContext servletContext = request.getSession().getServletContext();
       JmxProxy watcherJmxProxy = (JmxProxy) servletContext.getAttribute(DYNO_WATCHER_JMX_PROXY);
-      String dynoName = (String) servletContext.getAttribute(DYNO_NAME);
       DynoMXBean dynoProxy = (DynoMXBean) servletContext.getAttribute(DYNO_PROXY);
+      String dynoName = (String) servletContext.getAttribute(DYNO_NAME);
 
       if (dynoProxy == null) {
         writer.println("<p>Dyno JmxProxy not available</p>");
@@ -59,7 +59,7 @@ public class DefaultServlet
         String queryString = request.getQueryString();
         String url = isNullOrEmpty(queryString) ? uri : format("%s?%s", uri, queryString);
 
-        // Invoke Dyno MBean proxies
+        // Invoke Dyno MBean proxy
         dynoProxy.recordRequest(url);
         int count = dynoProxy.getRequestCount();
         List<Request> requests = dynoProxy.getRequests(5);
@@ -76,6 +76,7 @@ public class DefaultServlet
         }
       }
 
+      // Display summary of all the dynos in an iframe
       writer.println("<br/><p>Summary of all web dynos:</p>");
       writer.println("<iframe src='/summary' width='100%' height='800'>></iframe>");
 
