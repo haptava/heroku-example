@@ -40,6 +40,8 @@ public class DefaultServlet
     try {
       PrintWriter writer = response.getWriter();
       writer.println("<!DOCTYPE html>\n<html>\n<body>");
+      writer.println("<a href='https://api.haptava.io/webdav/MBeanServers/System/Launchers' " +
+                         "target='_blank'>View MBeanServers</a><br/>");
       writer.println(format("<br/><button type='button' onclick=\"window.location.href='/%s';\">" +
                                 "Make Request</button>", format("request-%d.html", new Random().nextInt(100))));
       writer.println("<button type='button' onclick=\"window.location.href='/reset';\">Reset All Web Dynos</button>");
