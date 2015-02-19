@@ -7,10 +7,10 @@ This example is designed to run a single `worker` dyno and multiple `web` dynos.
 
 ### Worker Dyno
 The worker dyno runs a [DynoWatcherServer][dynowatcherserver] that:
-* Registers a [DynoWatcher MBean][dynowatchermbean] with its `platform` MBeanServer.
+* Registers a [DynoWatcher MBean][dynowatchermbean] with its `platform` MBeanServer
 * Creates a [JmxConnectorLauncher][jmxconnectorlauncher] that connects its platform MBeanServer
-to Haptava as `platform@heroku-dyno-watcher-XXXXX`.
-XXXXX is a unique id specific to each Heroku deployment of the heroku-example app.
+to Haptava as `platform@heroku-dyno-watcher-XXXXX`
+(XXXXX is a unique id specific to each Heroku deployment of the heroku-example app)
 
 ### Web Dyno
 Each web dyno runs a Jetty-based [PageServer][pageserver] and is
