@@ -6,11 +6,11 @@ This example is designed to run a single `worker` dyno and multiple `web` dynos.
 ![Overview](docs/overview.png)
 
 ### Worker Dyno
-The worker dyno runs a [DynoWatcherServer][dynowatchserver] that:
-* Registers a [DynoWatcher MBean][dynowatchermbean] with its `platform` MBeanServer
-* Creates a [JmxConnectorLauncher][jmxconnectorlauncher], which connects the worker dyno platform MBeanServer
-to Haptava as `platform@heroku-dyno-watcher-XXXXX`
-(XXXXX is a unique id specific to each Heroku deployment of the heroku-example app)
+The worker dyno runs a [DynoWatcherServer][dynowatcherserver] that:
+* Registers a [DynoWatcher MBean][dynowatchermbean] with its `platform` MBeanServer.
+* Creates a [JmxConnectorLauncher][jmxconnectorlauncher] that connects its platform MBeanServer
+to Haptava as `platform@heroku-dyno-watcher-XXXXX`.
+XXXXX is a unique id specific to each Heroku deployment of the heroku-example app.
 
 ### Web Dyno
 Each web dyno runs a Jetty-based [PageServer][pageserver] and is
@@ -31,7 +31,7 @@ to members of the user group.
    * [DynoWatcherMXBean][dynowatchermxbean] on the worker dyno platform MBeanServer
    * [DynoMXBean][dynomxbean] on the worker dyno platform MBeanServer
  
-* Registers itself with the DynoWatcherServer, which assigns it a unique name.
+* Registers itself with the [DynoWatcherServer][dynowatcherserver], which assigns it a unique name.
 The DynoWatcher also registers a
 [Dyno MBean][dynombean] for each web dyno.
 
@@ -42,14 +42,15 @@ The DynoWatcher also registers a
 
 ### Heroku Config Vars
 * `HAPTAVA_USERNAME` and `HAPTAVA_PASSWORD` for credentials.
-* `APPLICATION_ID` is a unique ID used to avoid collisions between users in the same user group running the app.
+* `APPLICATION_ID` is a unique ID used to avoid collisions between users in the same user group running
+the heroku-example app.
 
 ## Deploy to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 The heroku-example requires a worker dyno to be running, but the
-[Deploy to Heroku][deploydocs] functionality does not allow
+["Deploy to Heroku"][deploydocs] functionality does not allow
 starting worker dynos. So after [deploying][deploy]
 the heroku-example app to your [Heroku][heroku] account, adjust the number of dynos:
 * Go to [Heroku Dashboard] [dashboard]
@@ -60,8 +61,8 @@ and the number of web dynos to 5.
 Install the [Heroku toolbelt][toolbelt] to control dyno scaling from the CLI and
 view the dyno logs.
 
-When you finish experimenting with your heroku-example app, make sure you decrease the
-number of worker and web dynos to 0 to avoid charges.
+When you finish experimenting with your heroku-example app, make sure you stop all the dynos
+to avoid charges.
 
 ## Running the App
 
