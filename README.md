@@ -57,13 +57,13 @@ manually:
 * Go to [Heroku Dashboard] [dashboard]
 * Go to your newly-deployed heroku-example application
 * Go to the “Resources” page and increase the number of worker dynos to 1
-and the number of web dynos to 3.
+and the number of web dynos to 5.
 
 If you want to clone the repository, control the dynos with the [Heroku toolbelt][toolbelt]
 and view the dyno logs, follow the instructions on the "Deploy" page.
 
-When you are finished experimenting with your heroku-example app, make sure you roll back the
-worker and web dynos to 0 to avoid charges.
+When you are finished experimenting with your heroku-example app, make sure you decrease the
+number of worker and web dynos to 0 to avoid charges.
 
 ## Running the App
 
@@ -74,6 +74,9 @@ For each request you can see:
 * the MBeanServer and MBean invoked during the request
 * the web dyno that handled the request and a summary it recent requests
 * a summary of all the web dynos
+
+You can modify the number of web dynos to any number greater than 0, but do not increase the number of
+worker dynos aboce 1.
 
 The summary page embedded in the default servlet is at: `https://foo.herokuapp.com/summary`
 
