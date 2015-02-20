@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/haptava/heroku-example.svg?branch=master)](https://travis-ci.org/haptava/heroku-example)
-
-# Heroku Example App
+# Heroku Example App [![Build Status](https://travis-ci.org/haptava/heroku-example.svg?branch=master)](https://travis-ci.org/haptava/heroku-example)
 
 ## Contents
  - [Overview](#overview)
