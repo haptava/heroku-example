@@ -9,12 +9,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.haptava.examples</groupId>
   <artifactId>heroku-example</artifactId>
-
-  <name>HaptavaHerokuExample</name>
-  <description>Haptava Heroku Example</description>
   <version>1.0-SNAPSHOT</version>
 
-  <url>https://pambrose@github.com/haptava/heroku-example.git</url>
+  <name>Haptava Heroku Example</name>
+  <description>Haptava Heroku Example</description>
+  <url>https://github.com/haptava/heroku-webdav.git</url>
 
   <properties>
     <maven.compiler.version>3.2</maven.compiler.version>
