@@ -1,6 +1,6 @@
 {
   "name": "Haptava Heroku Example",
-  "description": "A simple example of using Haptava with Heroku",
+  "description": "A simple example of using Haptava on Heroku",
   "repository": "https://github.com/haptava/heroku-example",
   "logo": "https://dl.dropboxusercontent.com/u/481551/haptava/haptava_logo.svg",
   "keywords": [
