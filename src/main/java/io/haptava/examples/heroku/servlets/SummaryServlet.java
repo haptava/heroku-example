@@ -6,6 +6,7 @@ package io.haptava.examples.heroku.servlets;
 
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.FluentIterable;
+import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import io.haptava.api.jmxproxy.JmxProxy;
 import io.haptava.examples.heroku.mbeans.Dyno;
@@ -42,6 +43,7 @@ public class SummaryServlet
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
 
     response.setContentType(HttpConstants.PLAIN_CONTENT);
+    response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
     response.setStatus(HttpServletResponse.SC_OK);
 
     try {

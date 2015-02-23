@@ -4,6 +4,7 @@
 
 package io.haptava.examples.heroku.servlets;
 
+import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import io.haptava.api.jmxproxy.JmxProxy;
 import io.haptava.examples.heroku.mbeans.DynoWatcherMXBean;
@@ -29,6 +30,7 @@ public class ResetServlet
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
 
     response.setContentType(HttpConstants.HTML_CONTENT);
+    response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
     response.setStatus(HttpServletResponse.SC_OK);
 
     try {
