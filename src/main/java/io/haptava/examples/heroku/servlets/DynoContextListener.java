@@ -75,8 +75,7 @@ public class DynoContextListener
               contextEvent.getServletContext().setAttribute(DYNO_NAME, dynoName);
             }
             catch (final Exception e) {
-              System.out.println(format("Unable to initialize Haptava [%s - %s]",
-                                        e.getClass().getSimpleName(), e.getMessage()));
+              System.out.println(format("Unable to initialize [%s: %s]", e.getClass().getSimpleName(), e.getMessage()));
             }
           }
         });

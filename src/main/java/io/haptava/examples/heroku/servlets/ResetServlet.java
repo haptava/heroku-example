@@ -43,6 +43,7 @@ public class ResetServlet
         writer.println("<p>DynoWatcher JmxProxy not available</p>");
       }
       else {
+        // Invoke DynoWatcher MBean proxy
         dynoWatcherProxy.resetDynos();
         writer.println(format("<p>Invoked MBeanServer %s MBean %s%n</p>",
                               quote(dynoWatcherJmxProxy.getServerName()),

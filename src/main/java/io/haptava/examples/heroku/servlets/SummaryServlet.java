@@ -74,6 +74,7 @@ public class SummaryServlet
         writer.println("DynoWatcher JmxProxy not available");
       }
       else {
+        // Invoke DynoWatcher MBean proxy
         List<Dyno> unsortedDynos = dynoWatcherProxy.getDynos();
 
         if (unsortedDynos == null || unsortedDynos.size() == 0) {
