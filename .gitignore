@@ -3,3 +3,5 @@ target
 .DS_STORE
 logs
 *.iws
+*.iml
+*.ipr
