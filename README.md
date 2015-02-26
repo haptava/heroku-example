@@ -11,7 +11,7 @@
 ## Overview
 This example is designed to run a single `worker` dyno and multiple `web` dynos.
 
-![Overview](https://dl.dropboxusercontent.com/u/481551/haptava/overview.png)
+![Overview](https://dl.dropboxusercontent.com/u/481551/haptava/heroku_example_overview.png)
 
 ### Worker Dyno
 The worker dyno runs a [DynoWatcherServer][dynowatcherserver] that:
