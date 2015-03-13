@@ -17,19 +17,17 @@ public class PageServer {
   public static void main(final String[] argv)
       throws Exception {
 
-    int port = Integer.valueOf(System.getenv("PORT"));
+    final Context context = new Context(Context.SESSIONS);
+    context.setContextPath("/");
+    context.addEventListener(new DynoContextListener());
+    context.addServlet(new ServletHolder(new ResetServlet()), "/reset");
+    context.addServlet(new ServletHolder(new SummaryServlet()), "/summary");
+    context.addServlet(new ServletHolder(new DefaultServlet()), "/*");
 
-    new Server(port) {{
-      setHandler(
-          new Context(Context.SESSIONS) {{
-            setContextPath("/");
-            addEventListener(new DynoContextListener());
-            addServlet(new ServletHolder(new ResetServlet()), "/reset");
-            addServlet(new ServletHolder(new SummaryServlet()), "/summary");
-            addServlet(new ServletHolder(new DefaultServlet()), "/*");
-          }});
-      start();
-      join();
-    }};
+    int port = Integer.valueOf(System.getenv("PORT"));
+    final Server server = new Server(port);
+    server.setHandler(context);
+    server.start();
+    server.join();
   }
 }
