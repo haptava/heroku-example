@@ -70,6 +70,7 @@ public class ResetServlet
     }
 
     this.getRequestCounter().inc();
+    this.getRequestMeter().mark();
     this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

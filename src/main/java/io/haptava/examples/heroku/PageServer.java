@@ -24,12 +24,12 @@ public class PageServer {
   public static void main(final String[] argv)
       throws Exception {
 
-    final MetricRegistry metricRegistry = new MetricRegistry();
+    MetricRegistry metricRegistry = new MetricRegistry();
 
     JmxReporter.forRegistry(metricRegistry)
                .inDomain("io.haptava.heroku")
                .createsObjectNamesWith(ObjectNameWithFolders.OBJECT_NAMES_WITH_FOLDERS)
-               .convertRatesTo(TimeUnit.SECONDS)
+               .convertRatesTo(TimeUnit.MINUTES)
                .convertDurationsTo(TimeUnit.MILLISECONDS)
                .registerWith(ManagementFactory.getPlatformMBeanServer())
                .build()
@@ -38,15 +38,16 @@ public class PageServer {
     MetricUtils.newJvmMetricCollection(metricRegistry, ManagementFactory.getPlatformMBeanServer())
                .register();
 
-    final Context context = new Context(Context.SESSIONS);
+    Context context = new Context(Context.SESSIONS);
     context.setContextPath("/");
     context.addEventListener(new DynoContextListener());
     context.addServlet(new ServletHolder(new ResetServlet(metricRegistry)), "/reset");
     context.addServlet(new ServletHolder(new SummaryServlet(metricRegistry)), "/summary");
     context.addServlet(new ServletHolder(new DefaultServlet(metricRegistry)), "/*");
 
-    int port = Integer.valueOf(System.getenv("PORT"));
-    final Server server = new Server(port);
+    String portVal = System.getenv("PORT");
+    int port = portVal != null ? Integer.valueOf(portVal) : 8000;
+    Server server = new Server(port);
     server.setHandler(context);
     server.start();
     server.join();

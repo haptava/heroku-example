@@ -136,6 +136,7 @@ public class SummaryServlet
     }
 
     this.getRequestCounter().inc();
+    this.getRequestMeter().mark();
     this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

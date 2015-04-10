@@ -15,11 +15,11 @@ public abstract class ServletWithMetrics
   private final Meter          requestMeter;
   private final Histogram      requestHistogram;
 
-  public ServletWithMetrics(final MetricRegistry metricRegistry, final String prefix) {
+  public ServletWithMetrics(final MetricRegistry metricRegistry, final String name) {
     this.metricRegistry = metricRegistry;
-    this.requestCounter = metricRegistry.counter(MetricRegistry.name(prefix, "requestCounter"));
-    this.requestMeter = metricRegistry.meter(MetricRegistry.name(prefix, "requestMeter"));
-    this.requestHistogram = metricRegistry.histogram(MetricRegistry.name(prefix, "requestHistogram"));
+    this.requestCounter = metricRegistry.counter(MetricRegistry.name("servlets", name, "requestCounter"));
+    this.requestMeter = metricRegistry.meter(MetricRegistry.name("servlets", name, "requestMeter"));
+    this.requestHistogram = metricRegistry.histogram(MetricRegistry.name("servlets", name, "requestHistogram"));
   }
 
   protected MetricRegistry getMetricRegistry() { return this.metricRegistry; }

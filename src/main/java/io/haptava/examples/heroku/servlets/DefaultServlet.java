@@ -97,6 +97,7 @@ public class DefaultServlet
     }
 
     this.getRequestCounter().inc();
+    this.getRequestMeter().mark();
     this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }
