@@ -4,16 +4,18 @@
 
 package io.haptava.examples.heroku.servlets;
 
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Stopwatch;
 import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import io.haptava.api.jmxproxy.JmxProxy;
 import io.haptava.examples.heroku.mbeans.DynoWatcherMXBean;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 import static com.sudothought.util.StringUtils.quote;
 import static io.haptava.examples.heroku.Constants.DYNO_WATCHER_JMX_PROXY;
@@ -22,12 +24,18 @@ import static io.haptava.examples.heroku.Constants.getDynoWatcherMBeanObjectName
 import static java.lang.String.format;
 
 public class ResetServlet
-    extends HttpServlet {
+    extends ServletWithMetrics {
 
   private static final long serialVersionUID = 8652730110987874083L;
 
+  public ResetServlet(final MetricRegistry metricRegistry) {
+    super(metricRegistry, "reset");
+  }
+
   @Override
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+
+    final Stopwatch sw = Stopwatch.createStarted();
 
     response.setContentType(HttpConstants.HTML_CONTENT);
     response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
@@ -60,5 +68,8 @@ public class ResetServlet
     catch (final Exception e) {
       e.printStackTrace();
     }
+
+    this.getRequestCounter().inc();
+    this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

@@ -14,8 +14,9 @@ public class DynoMBean
     extends NotificationBroadcasterSupport
     implements DynoMXBean {
 
-  private final List<Request> requests         = Lists.newArrayList();
-  private final long          createTimeMillis = System.currentTimeMillis();
+  private final List<Request> requests = Lists.newArrayList();
+
+  private final long createTimeMillis = System.currentTimeMillis();
 
   private long lastActivityMillis = 0;
 

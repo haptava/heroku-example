@@ -16,12 +16,17 @@
   <url>https://github.com/haptava/heroku-webdav.git</url>
 
   <properties>
-    <maven.compiler.version>3.2</maven.compiler.version>
+    <jdk.version>1.6</jdk.version>
     <maven.build.timestamp.format>yyyy-MM-dd-HH:mm:ss</maven.build.timestamp.format>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <metrics.version>3.1.1</metrics.version>
     <jetty.version>6.1.26</jetty.version>
     <slf4j.version>1.7.7</slf4j.version>
+
+    <maven.compiler.version>3.2</maven.compiler.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
     <appassembler.version>1.9</appassembler.version>
 
     <haptava.version>0.9.39-SNAPSHOT</haptava.version>

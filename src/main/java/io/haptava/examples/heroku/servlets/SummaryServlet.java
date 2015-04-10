@@ -4,6 +4,8 @@
 
 package io.haptava.examples.heroku.servlets;
 
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.FluentIterable;
 import com.google.common.net.HttpHeaders;
@@ -16,12 +18,12 @@ import io.haptava.mbeans.server.mbeanserver.MBeanServerAdminMXBean;
 import io.haptava.mbeans.server.mbeanserver.MBeanServerData;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.sudothought.util.StringUtils.quote;
 import static com.sudothought.util.TimeUtils.formatInterval;
@@ -35,12 +37,18 @@ import static io.haptava.examples.heroku.Constants.getDynoWatcherMBeanObjectName
 import static java.lang.String.format;
 
 public class SummaryServlet
-    extends HttpServlet {
+    extends ServletWithMetrics {
 
   private static final long serialVersionUID = 8169409140957634977L;
 
+  public SummaryServlet(final MetricRegistry metricRegistry) {
+    super(metricRegistry, "summary");
+  }
+
   @Override
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+
+    final Stopwatch sw = Stopwatch.createStarted();
 
     response.setContentType(HttpConstants.PLAIN_CONTENT);
     response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
@@ -126,5 +134,8 @@ public class SummaryServlet
     catch (final Exception e) {
       e.printStackTrace();
     }
+
+    this.getRequestCounter().inc();
+    this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

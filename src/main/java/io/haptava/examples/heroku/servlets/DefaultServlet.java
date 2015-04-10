@@ -4,6 +4,8 @@
 
 package io.haptava.examples.heroku.servlets;
 
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Stopwatch;
 import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import com.sudothought.util.Utils;
@@ -12,12 +14,12 @@ import io.haptava.examples.heroku.mbeans.DynoMXBean;
 import io.haptava.examples.heroku.mbeans.Request;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.sudothought.util.StringUtils.quote;
@@ -28,12 +30,18 @@ import static io.haptava.examples.heroku.Constants.getDynoMBeanObjectName;
 import static java.lang.String.format;
 
 public class DefaultServlet
-    extends HttpServlet {
+    extends ServletWithMetrics {
 
   private static final long serialVersionUID = 3290741662122411590L;
 
+  public DefaultServlet(final MetricRegistry metricRegistry) {
+    super(metricRegistry, "default");
+  }
+
   @Override
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+
+    final Stopwatch sw = Stopwatch.createStarted();
 
     response.setContentType(HttpConstants.HTML_CONTENT);
     response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
@@ -61,7 +69,7 @@ public class DefaultServlet
         String queryString = request.getQueryString();
         String url = isNullOrEmpty(queryString) ? uri : format("%s?%s", uri, queryString);
 
-        // Invoke Dyno MBean proxy
+        // Invoke Dyno MBean proxy methods
         dynoProxy.recordRequest(url);
         int count = dynoProxy.getRequestCount();
         List<Request> requests = dynoProxy.getRequests(5);
@@ -81,12 +89,14 @@ public class DefaultServlet
       // Display summary of all the dynos in an iframe
       writer.println("<br/><p>Summary of all web dynos:</p>");
       writer.println("<iframe src='/summary' width='100%' height='800'>></iframe>");
-
       writer.println("</body>\n</html>");
       writer.close();
     }
     catch (final Exception e) {
       e.printStackTrace();
     }
+
+    this.getRequestCounter().inc();
+    this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

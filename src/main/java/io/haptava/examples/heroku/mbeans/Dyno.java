@@ -16,7 +16,7 @@ public class Dyno {
   private final long          requestCount;
   private final List<Request> requests;
 
-  // @ConstructorProperties is required for MXBeans
+  // @ConstructorProperties required for MXBeans
   @ConstructorProperties({"name", "hostName", "createTimeMillis", "lastActivityMillis", "requestCount", "requests"})
   public Dyno(final String name,
               final String hostName,
