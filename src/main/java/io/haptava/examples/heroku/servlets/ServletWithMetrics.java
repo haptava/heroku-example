@@ -4,29 +4,29 @@ import com.codahale.metrics.Counter;
 import com.codahale.metrics.Histogram;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Stopwatch;
 
 import javax.servlet.http.HttpServlet;
+import java.util.concurrent.TimeUnit;
 
 public abstract class ServletWithMetrics
     extends HttpServlet {
 
-  private final MetricRegistry metricRegistry;
-  private final Counter        requestCounter;
-  private final Meter          requestMeter;
-  private final Histogram      requestHistogram;
+  private static final String PREFIX = "servlets";
 
-  public ServletWithMetrics(final MetricRegistry metricRegistry, final String name) {
-    this.metricRegistry = metricRegistry;
-    this.requestCounter = metricRegistry.counter(MetricRegistry.name("servlets", name, "requestCounter"));
-    this.requestMeter = metricRegistry.meter(MetricRegistry.name("servlets", name, "requestMeter"));
-    this.requestHistogram = metricRegistry.histogram(MetricRegistry.name("servlets", name, "requestHistogram"));
+  private final Counter   requestCounter;
+  private final Meter     requestMeter;
+  private final Histogram requestHistogram;
+
+  protected ServletWithMetrics(final MetricRegistry metricRegistry, final String name) {
+    this.requestCounter = metricRegistry.counter(MetricRegistry.name(PREFIX, name, "requestCounter"));
+    this.requestMeter = metricRegistry.meter(MetricRegistry.name(PREFIX, name, "requestMeter"));
+    this.requestHistogram = metricRegistry.histogram(MetricRegistry.name(PREFIX, name, "requestHistogram"));
   }
 
-  protected MetricRegistry getMetricRegistry() { return this.metricRegistry; }
-
-  protected Counter getRequestCounter() { return this.requestCounter; }
-
-  public Meter getRequestMeter() { return this.requestMeter; }
-
-  protected Histogram getRequestHistogram() { return this.requestHistogram; }
+  protected void markMetrics(final Stopwatch sw) {
+    this.requestCounter.inc();
+    this.requestMeter.mark();
+    this.requestHistogram.update(sw.elapsed(TimeUnit.MILLISECONDS));
+  }
 }

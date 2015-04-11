@@ -15,7 +15,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.util.concurrent.TimeUnit;
 
 import static com.sudothought.util.StringUtils.quote;
 import static io.haptava.examples.heroku.Constants.DYNO_WATCHER_JMX_PROXY;
@@ -69,8 +68,6 @@ public class ResetServlet
       e.printStackTrace();
     }
 
-    this.getRequestCounter().inc();
-    this.getRequestMeter().mark();
-    this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
+    this.markMetrics(sw);
   }
 }

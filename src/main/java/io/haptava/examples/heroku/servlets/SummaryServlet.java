@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.sudothought.util.StringUtils.quote;
 import static com.sudothought.util.TimeUtils.formatInterval;
@@ -135,8 +134,6 @@ public class SummaryServlet
       e.printStackTrace();
     }
 
-    this.getRequestCounter().inc();
-    this.getRequestMeter().mark();
-    this.getRequestHistogram().update(sw.elapsed(TimeUnit.MILLISECONDS));
+    this.markMetrics(sw);
   }
 }
