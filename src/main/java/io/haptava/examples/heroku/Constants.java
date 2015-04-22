@@ -15,13 +15,9 @@ public class Constants {
   public static final String DYNO_NAME                = "dynoName";
   public static final int    RETRY_SECS               = 15;
 
-  public static String getDynoWatcherLauncherName() {
-    return format("heroku-dyno-watcher-%s", getApplicationId());
-  }
+  public static String getDynoWatcherLauncherName() { return format("heroku-dyno-watcher-%s", getApplicationId()); }
 
-  public static String getDynoWatcherMBeanObjectName() {
-    return format("%s:name=DynoWatcher", EXAMPLE_DOMAIN);
-  }
+  public static String getDynoWatcherMBeanObjectName() { return format("%s:name=DynoWatcher", EXAMPLE_DOMAIN); }
 
   public static String getDynoMBeanObjectName(final String dynoName) {
     return format("%s:type=Dynos,name=%s", EXAMPLE_DOMAIN, dynoName);
@@ -32,7 +28,7 @@ public class Constants {
   public static String getApplicationId() {
     String id = System.getenv("APPLICATION_ID");
     if (isNullOrEmpty(id))
-      return "MISSING";
+      return "NO_APP_ID";
     else if (id.length() <= 5)
       return id;
     else

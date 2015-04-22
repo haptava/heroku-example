@@ -85,9 +85,9 @@ public class DynoContextListener
       throws ConfigurationException, LauncherException {
     // Credentials are with set Heroku config vars HAPTAVA_USERNAME and HAPTAVA_PASSWORD
     this.launcher =
-        new JmxProxyLauncher
-            .Builder()
-            .setLauncherName(format("heroku-dyno-%s", getApplicationId()))
+        new JmxProxyLauncher.Builder()
+            .setLauncherName(format("heroku-dyno-page-%s", getApplicationId()))
+            .setLoginUrl("http://localhost:8090")
             .setUniqueLauncherName(true)
             .build();
 

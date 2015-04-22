@@ -16,17 +16,17 @@ public abstract class ServletWithMetrics
 
   private final Counter   requestCounter;
   private final Meter     requestMeter;
-  private final Histogram requestHistogram;
+  private final Histogram requestTimeHistogram;
 
   protected ServletWithMetrics(final MetricRegistry metricRegistry, final String name) {
     this.requestCounter = metricRegistry.counter(MetricRegistry.name(PREFIX, name, "requestCounter"));
     this.requestMeter = metricRegistry.meter(MetricRegistry.name(PREFIX, name, "requestMeter"));
-    this.requestHistogram = metricRegistry.histogram(MetricRegistry.name(PREFIX, name, "requestHistogram"));
+    this.requestTimeHistogram = metricRegistry.histogram(MetricRegistry.name(PREFIX, name, "requestMillisHistogram"));
   }
 
   protected void markMetrics(final Stopwatch sw) {
     this.requestCounter.inc();
     this.requestMeter.mark();
-    this.requestHistogram.update(sw.elapsed(TimeUnit.MILLISECONDS));
+    this.requestTimeHistogram.update(sw.elapsed(TimeUnit.MILLISECONDS));
   }
 }

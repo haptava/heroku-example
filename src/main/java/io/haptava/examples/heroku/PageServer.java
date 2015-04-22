@@ -27,7 +27,7 @@ public class PageServer {
     MetricRegistry metricRegistry = new MetricRegistry();
 
     JmxReporter.forRegistry(metricRegistry)
-               .inDomain("io.haptava.heroku")
+               .inDomain(Constants.EXAMPLE_DOMAIN)
                .createsObjectNamesWith(ObjectNameWithFolders.OBJECT_NAMES_WITH_FOLDERS)
                .convertRatesTo(TimeUnit.MINUTES)
                .convertDurationsTo(TimeUnit.MILLISECONDS)
