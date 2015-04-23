@@ -1,6 +1,7 @@
 package io.haptava.examples.heroku.servlets;
 
 import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Stopwatch;
 import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import com.sudothought.util.IoUtils;
@@ -22,6 +23,8 @@ public class HtmlPage
   @Override
   protected void doGet(final HttpServletRequest request, final HttpServletResponse response) {
 
+    final Stopwatch sw = Stopwatch.createStarted();
+
     response.setContentType(HttpConstants.HTML_CONTENT);
     response.setHeader(HttpHeaders.CACHE_CONTROL, HttpConstants.NO_CACHE);
     response.setStatus(HttpServletResponse.SC_OK);
@@ -35,5 +38,7 @@ public class HtmlPage
     catch (final Exception e) {
       e.printStackTrace();
     }
+
+    this.markMetrics(sw);
   }
 }
