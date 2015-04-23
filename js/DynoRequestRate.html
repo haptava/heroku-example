@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Dyno RequestRate</title>
+
+  <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+  <script type='text/javascript' src='http://code.highcharts.com/highcharts.js'></script>
+  <script type='text/javascript'>
+
+    var src = 'https://api.haptava.io/public/versly/queries/72e17e5f-58ed-4a41-a29d-3dcd52aa00c5';
+    var chart;
+
+    function requestData() {
+      $.ajax({
+        url: src,
+        success: function (json) {
+
+          if (chart.series.length != json.length) {
+            location.reload();
+          }
+          else {
+            for (i = 0; i < chart.series.length; i++) {
+              chart.series[i].setData(json[i].data);
+            }
+          }
+
+          // call it again after a pause
+          setTimeout(requestData, 3000);
+        },
+        cache: false
+      });
+    }
+
+    $(document).ready(function () {
+      var options = {
+        chart: {
+          renderTo: 'container',
+          type: 'bar',
+          events: {
+            load: requestData
+          }
+        },
+        title: {
+          text: ''
+        },
+        xAxis: {
+          title: {
+            text: ''
+          },
+          categories: []
+        },
+        yAxis: {
+          title: {
+            text: ''
+          }
+        },
+        series: [{
+          name: '',
+          data: []
+        }]
+      };
+
+      $.getJSON(src,
+          function (json) {
+            options.title.text = json[0].chart_title;
+            options.xAxis.title.text = json[0].vertical_title;
+            options.yAxis.title.text = json[0].horizontal_title;
+            options.xAxis.categories = json[0].categories;
+            options.series = json;
+            chart = new Highcharts.Chart(options);
+          });
+    });
+  </script>
+
+</head>
+<body>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+</body>
+</html>

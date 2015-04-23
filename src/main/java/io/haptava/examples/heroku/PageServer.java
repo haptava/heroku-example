@@ -10,6 +10,7 @@ import com.sudothought.metrics.MetricUtils;
 import com.sudothought.metrics.ObjectNameWithFolders;
 import io.haptava.examples.heroku.servlets.DefaultServlet;
 import io.haptava.examples.heroku.servlets.DynoContextListener;
+import io.haptava.examples.heroku.servlets.HtmlPage;
 import io.haptava.examples.heroku.servlets.ResetServlet;
 import io.haptava.examples.heroku.servlets.SummaryServlet;
 import org.mortbay.jetty.Server;
@@ -41,6 +42,7 @@ public class PageServer {
     Context context = new Context(Context.SESSIONS);
     context.setContextPath("/");
     context.addEventListener(new DynoContextListener());
+    context.addServlet(new ServletHolder(new HtmlPage("./js/DynoRequestRate.html")), "/dyno_request_rate");
     context.addServlet(new ServletHolder(new ResetServlet(metricRegistry)), "/reset");
     context.addServlet(new ServletHolder(new SummaryServlet(metricRegistry)), "/summary");
     context.addServlet(new ServletHolder(new DefaultServlet(metricRegistry)), "/*");
