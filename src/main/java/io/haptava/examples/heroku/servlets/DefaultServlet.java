@@ -33,8 +33,8 @@ public class DefaultServlet
 
   private static final long serialVersionUID = 3290741662122411590L;
 
-  public DefaultServlet(final MetricRegistry metricRegistry) {
-    super(metricRegistry, "default");
+  public DefaultServlet(final MetricRegistry metricRegistry, final String metricName) {
+    super(metricRegistry, metricName);
   }
 
   @Override

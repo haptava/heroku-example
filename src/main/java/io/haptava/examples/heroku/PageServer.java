@@ -42,10 +42,11 @@ public class PageServer {
     Context context = new Context(Context.SESSIONS);
     context.setContextPath("/");
     context.addEventListener(new DynoContextListener());
-    context.addServlet(new ServletHolder(new HtmlPage("./js/DynoRequestRate.html")), "/dyno_request_rate");
-    context.addServlet(new ServletHolder(new ResetServlet(metricRegistry)), "/reset");
-    context.addServlet(new ServletHolder(new SummaryServlet(metricRegistry)), "/summary");
-    context.addServlet(new ServletHolder(new DefaultServlet(metricRegistry)), "/*");
+    context.addServlet(new ServletHolder(new HtmlPage(metricRegistry, "hello", "./js/HelloWorld.html")), "/hello");
+    context.addServlet(new ServletHolder(new HtmlPage(metricRegistry, "requestRate", "./js/DynoRequestRate.html")), "/dyno_request_rate");
+    context.addServlet(new ServletHolder(new ResetServlet(metricRegistry, "reset")), "/reset");
+    context.addServlet(new ServletHolder(new SummaryServlet(metricRegistry, "summary")), "/summary");
+    context.addServlet(new ServletHolder(new DefaultServlet(metricRegistry, "default")), "/*");
 
     String portVal = System.getenv("PORT");
     int port = portVal != null ? Integer.valueOf(portVal) : 8000;

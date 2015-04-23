@@ -1,20 +1,21 @@
 package io.haptava.examples.heroku.servlets;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import com.sudothought.util.IoUtils;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 public class HtmlPage
-    extends HttpServlet {
+    extends ServletWithMetrics {
 
   private final String filename;
 
-  public HtmlPage(final String filename) {
+  public HtmlPage(final MetricRegistry metricRegistry, final String metricName, final String filename) {
+    super(metricRegistry, metricName);
     this.filename = filename;
   }
 

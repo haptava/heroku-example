@@ -27,8 +27,8 @@ public class ResetServlet
 
   private static final long serialVersionUID = 8652730110987874083L;
 
-  public ResetServlet(final MetricRegistry metricRegistry) {
-    super(metricRegistry, "reset");
+  public ResetServlet(final MetricRegistry metricRegistry, final String metricName) {
+    super(metricRegistry, metricName);
   }
 
   @Override

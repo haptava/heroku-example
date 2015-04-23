@@ -40,8 +40,8 @@ public class SummaryServlet
 
   private static final long serialVersionUID = 8169409140957634977L;
 
-  public SummaryServlet(final MetricRegistry metricRegistry) {
-    super(metricRegistry, "summary");
+  public SummaryServlet(final MetricRegistry metricRegistry, final String metricName) {
+    super(metricRegistry, metricName);
   }
 
   @Override
