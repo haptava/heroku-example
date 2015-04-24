@@ -2,22 +2,34 @@ package io.haptava.examples.heroku.servlets;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.Maps;
 import com.google.common.net.HttpHeaders;
 import com.sudothought.http.HttpConstants;
 import com.sudothought.util.IoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class HtmlPage
     extends ServletWithMetrics {
+
+  private static Map<String, String> FILE_MAP = Maps.newConcurrentMap();
 
   private final String filename;
 
   public HtmlPage(final MetricRegistry metricRegistry, final String metricName, final String filename) {
     super(metricRegistry, metricName);
     this.filename = filename;
+  }
+
+  private String getFile(final String fileName)
+      throws IOException {
+    if (!FILE_MAP.containsKey(fileName))
+      FILE_MAP.putIfAbsent(fileName, IoUtils.readFile(this.filename));
+    return FILE_MAP.get(fileName);
   }
 
   @Override
@@ -30,8 +42,8 @@ public class HtmlPage
     response.setStatus(HttpServletResponse.SC_OK);
 
     try {
-      PrintWriter writer = response.getWriter();
-      final String file = IoUtils.readFile(this.filename);
+      final PrintWriter writer = response.getWriter();
+      final String file = this.getFile(this.filename);
       writer.print(file);
       writer.close();
     }
