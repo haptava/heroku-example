@@ -37,8 +37,8 @@
     $(document).ready(function () {
       var options = {
         chart: {
-          renderTo: 'container',
           type: 'bar',
+          renderTo: 'container',
           events: {
             load: requestData
           }
@@ -46,16 +46,30 @@
         title: {
           text: ''
         },
+        subtitle: {
+          text: ''
+        },
         xAxis: {
+          min: 0,
+          crosshair: true,
           title: {
             text: ''
           },
           categories: []
         },
         yAxis: {
+          min: 0,
           title: {
             text: ''
           }
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
         },
         series: [{
           name: '',
@@ -66,8 +80,9 @@
       $.getJSON(src,
           function (json) {
             options.title.text = json[0].chart_title;
-            options.xAxis.title.text = json[0].vertical_title;
-            options.yAxis.title.text = json[0].horizontal_title;
+            options.subtitle.text = json[0].chart_subtitle;
+            options.xAxis.title.text = json[0].xAxis_title;
+            options.yAxis.title.text = json[0].yAxis_title;
             options.xAxis.categories = json[0].categories;
             options.series = json;
             chart = new Highcharts.Chart(options);
