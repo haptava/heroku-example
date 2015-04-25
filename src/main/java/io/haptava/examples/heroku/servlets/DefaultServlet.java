@@ -48,7 +48,9 @@ public class DefaultServlet
 
     try {
       PrintWriter writer = response.getWriter();
-      writer.println("<!DOCTYPE html>\n<html>\n<body>");
+      writer.println("<!DOCTYPE html>\n<html>"
+                         + "\n<head><meta name=\"blitz\" content=\"mu-dd4bffbb-ff2e9926-5a80952c-1c6cb64d\"></head>"
+                         + "\n<body>");
       writer.println("<a href='https://api.haptava.io/webdav/MBeanServers/System/Launchers' " +
                          "target='_blank'>View MBeanServers</a><br/>");
       writer.println(format("<br/><button type='button' onclick=\"window.location.href='/%s';\">" +
