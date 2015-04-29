@@ -19,8 +19,21 @@
         success: function (json) {
 
           var rec = json[0];
+          var reload = false;
 
           if (chart.series.length != rec.series.length) {
+            reload = true;
+          }
+          else {
+            for (i = 0; i < chart.series.length; i++) {
+              if (chart.series[i].name != rec.series[i].name) {
+                reload = true;
+                break;
+              }
+            }
+          }
+
+          if (reload) {
             location.reload();
           }
           else {
