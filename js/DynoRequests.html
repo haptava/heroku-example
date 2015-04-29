@@ -10,7 +10,7 @@
   <script type='text/javascript' src='http://code.highcharts.com/highcharts.js'></script>
   <script type='text/javascript'>
 
-    var src = 'https://api.haptava.io/public/versly/queries/72e17e5f-58ed-4a41-a29d-3dcd52aa00c5';
+    var src = 'https://api.haptava.io/public/versly/queries/7811800f-e892-4de9-9204-71053ff2a06f';
     var chart;
 
     function requestData() {
@@ -80,12 +80,14 @@
 
       $.getJSON(src,
           function (json) {
-            options.title.text = json[0].chart_title;
-            options.subtitle.text = json[0].chart_subtitle;
-            options.xAxis.title.text = json[0].xAxis_title;
-            options.yAxis.title.text = json[0].yAxis_title;
-            options.xAxis.categories = json[0].categories;
-            options.series = json;
+            var rec = json[0];
+            options.title.text = rec.chart_title;
+            options.subtitle.text = rec.chart_subtitle;
+            options.xAxis.title.text = rec.xAxis_title;
+            options.yAxis.title.text = rec.yAxis_title;
+            options.xAxis.categories = rec.categories;
+            options.series = rec.series;
+
             chart = new Highcharts.Chart(options);
           });
     });
