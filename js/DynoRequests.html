@@ -13,24 +13,24 @@
     var src = 'https://api.haptava.io/public/versly/queries/7811800f-e892-4de9-9204-71053ff2a06f';
     var chart;
 
-    function requestData() {
+    function queryData() {
       $.ajax({
         url: src,
         success: function (json) {
 
           var rec = json[0];
 
-          if (chart.series.length != rec.series.length) {
+          if (chart.series.length != json[0].series.length) {
             location.reload();
           }
           else {
             for (i = 0; i < chart.series.length; i++) {
-              chart.series[i].setData(rec.series[i]);
+              chart.series[i].setData(json[0].series[i]);
             }
           }
 
           // call it again after a pause
-          setTimeout(requestData, 3000);
+          setTimeout(queryData, 3000);
         },
         cache: false
       });
@@ -42,7 +42,7 @@
           type: 'bar',
           renderTo: 'container',
           events: {
-            load: requestData
+            load: queryData
           }
         },
         title: {
@@ -74,10 +74,7 @@
           shared: true,
           useHTML: true
         },
-        series: [{
-          name: '',
-          data: []
-        }]
+        series: []
       };
 
       $.getJSON(src,
