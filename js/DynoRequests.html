@@ -18,12 +18,14 @@
         url: src,
         success: function (json) {
 
-          if (chart.series.length != json.length) {
+          var rec = json[0];
+
+          if (chart.series.length != rec.series.length) {
             location.reload();
           }
           else {
             for (i = 0; i < chart.series.length; i++) {
-              chart.series[i].setData(json[i].data);
+              chart.series[i].setData(rec.series[i]);
             }
           }
 
