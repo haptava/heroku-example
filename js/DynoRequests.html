@@ -20,12 +20,13 @@
 
           var rec = json[0];
 
-          if (chart.series.length != json[0].series.length) {
+          if (chart.series.length != rec.series.length) {
             location.reload();
           }
           else {
             for (i = 0; i < chart.series.length; i++) {
-              chart.series[i].setData(json[0].series[i]);
+              var newData = rec.series[i];
+              chart.series[i].setData(newData);
             }
           }
 
