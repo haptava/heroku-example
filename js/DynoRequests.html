@@ -25,7 +25,7 @@
           }
           else {
             for (i = 0; i < chart.series.length; i++) {
-              var newData = rec.series[i];
+              var newData = rec.series[i].data;
               chart.series[i].setData(newData);
             }
           }
