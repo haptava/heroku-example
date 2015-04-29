@@ -43,7 +43,7 @@ public class PageServer {
     context.setContextPath("/");
     context.addEventListener(new DynoContextListener());
     context.addServlet(new ServletHolder(new HtmlPage(metricRegistry, "hello", "./js/HelloWorld.html")), "/hello");
-    context.addServlet(new ServletHolder(new HtmlPage(metricRegistry, "requestRate", "./js/DynoRequestRate.html")), "/dyno_request_rate");
+    context.addServlet(new ServletHolder(new HtmlPage(metricRegistry, "dynoRequests", "./js/DynoRequests.html")), "/dynoRequests");
     context.addServlet(new ServletHolder(new ResetServlet(metricRegistry, "reset")), "/reset");
     context.addServlet(new ServletHolder(new SummaryServlet(metricRegistry, "summary")), "/summary");
     context.addServlet(new ServletHolder(new DefaultServlet(metricRegistry, "default")), "/*");
