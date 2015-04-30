@@ -18,28 +18,37 @@
         url: src,
         success: function (json) {
 
-          var rec = json[0];
           var reload = false;
 
-          if (chart.series.length != rec.series.length) {
-            reload = true;
+          if (json.length != 1) {
+            alert("Error with query: length != 1");
           }
           else {
-            for (i = 0; i < chart.series.length; i++) {
-              if (chart.series[i].name != rec.series[i].name) {
-                reload = true;
-                break;
-              }
+            if (json[0].series == undefined) {
+              alert("Error with query: series missing");
             }
-          }
+            else {
+              if (chart.series.length != json[0].series.length) {
+                reload = true;
+              }
+              else {
+                for (i = 0; i < chart.series.length; i++) {
+                  if (chart.series[i].name != json[0].series[i].name) {
+                    reload = true;
+                    break;
+                  }
+                }
+              }
 
-          if (reload) {
-            location.reload();
-          }
-          else {
-            for (i = 0; i < chart.series.length; i++) {
-              var newData = rec.series[i].data;
-              chart.series[i].setData(newData);
+              if (reload) {
+                location.reload();
+              }
+              else {
+                for (i = 0; i < chart.series.length; i++) {
+                  var newData = json[0].series[i].data;
+                  chart.series[i].setData(newData);
+                }
+              }
             }
           }
 
