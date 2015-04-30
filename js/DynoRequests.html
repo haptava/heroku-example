@@ -19,9 +19,12 @@
         success: function (json) {
 
           var reload = false;
+          var skip = false;
 
-          if (json.length != 1) {
-            alert("JSON: " + json);
+          if (json.exceptionName != undefined) {
+            skip = true;
+          }
+          else if (json.length != 1) {
             alert("Error with query: length != 1");
           }
           else {
@@ -41,13 +44,15 @@
                 }
               }
 
-              if (reload) {
-                location.reload();
-              }
-              else {
-                for (i = 0; i < chart.series.length; i++) {
-                  var newData = json[0].series[i].data;
-                  chart.series[i].setData(newData);
+              if (!skip) {
+                if (reload) {
+                  location.reload();
+                }
+                else {
+                  for (i = 0; i < chart.series.length; i++) {
+                    var newData = json[0].series[i].data;
+                    chart.series[i].setData(newData);
+                  }
                 }
               }
             }
