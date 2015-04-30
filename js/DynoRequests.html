@@ -108,6 +108,11 @@
 
       $.getJSON(src,
           function (json) {
+
+            if (json.exceptionName != undefined) {
+              location.reload();
+            }
+
             var rec = json[0];
             options.title.text = rec.chart_title;
             options.subtitle.text = rec.chart_subtitle;
