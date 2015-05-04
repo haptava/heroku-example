@@ -25,11 +25,11 @@ public class HtmlPage
     this.filename = filename;
   }
 
-  private String getFile(final String fileName)
+  private String getFile(final String filename)
       throws IOException {
-    if (!FILE_MAP.containsKey(fileName))
-      FILE_MAP.putIfAbsent(fileName, IoUtils.readFile(this.filename));
-    return FILE_MAP.get(fileName);
+    if (!FILE_MAP.containsKey(filename))
+      FILE_MAP.putIfAbsent(filename, IoUtils.readFile(this.filename));
+    return FILE_MAP.get(filename);
   }
 
   @Override
