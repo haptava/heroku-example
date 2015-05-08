@@ -11,6 +11,7 @@
   <script type='text/javascript'>
 
     var src = 'https://api.haptava.io/public/versly/queries/7811800f-e892-4de9-9204-71053ff2a06f';
+    var reloadWaitTime = 5000;
     var chart;
 
     function queryData() {
@@ -46,7 +47,7 @@
 
               if (!skip) {
                 if (reload) {
-                  location.reload();
+                  setTimeout(location.reload(), reloadWaitTime);
                 }
                 else {
                   for (i = 0; i < chart.series.length; i++) {
@@ -109,16 +110,26 @@
       $.getJSON(src,
           function (json) {
 
-            if (json.exceptionName != undefined) {
-              location.reload();
-            }
+            if (json.exceptionName != undefined)
+              setTimeout(location.reload(), reloadWaitTime);
 
             var rec = json[0];
-            options.title.text = rec.chart_title;
-            options.subtitle.text = rec.chart_subtitle;
-            options.xAxis.title.text = rec.xAxis_title;
-            options.yAxis.title.text = rec.yAxis_title;
-            options.xAxis.categories = rec.categories;
+
+            if (rec.chart_title != undefined)
+              options.title.text = rec.chart_title;
+
+            if (rec.chart_subtitle != undefined)
+              options.subtitle.text = rec.chart_subtitle;
+
+            if (rec.xAxis_title != undefined)
+              options.xAxis.title.text = rec.xAxis_title;
+
+            if (rec.yAxis_title != undefined)
+              options.yAxis.title.text = rec.yAxis_title;
+
+            if (rec.categories != undefined)
+              options.xAxis.categories = rec.categories;
+
             options.series = rec.series;
 
             chart = new Highcharts.Chart(options);
