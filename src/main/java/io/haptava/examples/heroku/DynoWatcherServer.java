@@ -29,7 +29,6 @@ public class DynoWatcherServer {
       JmxConnectorLauncher launcher =
           new JmxConnectorLauncher.Builder()
               .setLauncherName(getDynoWatcherLauncherName())
-              .setLoginUrl("http://localhost:8090")
               .setUniqueLauncherName(true)
               .build();
 

@@ -87,7 +87,6 @@ public class DynoContextListener
     this.launcher =
         new JmxProxyLauncher.Builder()
             .setLauncherName(format("heroku-dyno-page-%s", getApplicationId()))
-            .setLoginUrl("http://localhost:8090")
             .setUniqueLauncherName(true)
             .build();
 
