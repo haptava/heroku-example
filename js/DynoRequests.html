@@ -10,8 +10,9 @@
   <script type='text/javascript' src='http://code.highcharts.com/highcharts.js'></script>
   <script type='text/javascript'>
 
-    var src = 'https://api.haptava.io/public/versly/queries/heroku_dyno_request_rate',
+    var src = 'https://api.haptava.io/public/versly/queries/heroku_dyno_requests',
         reloadWaitTime = 5000,
+        refreshWaitTime = 3000,
         chart;
 
     function queryData() {
@@ -60,7 +61,7 @@
           }
 
           // call it again after a pause
-          setTimeout(queryData, 3000);
+          setTimeout(queryData, refreshWaitTime);
         },
         cache: false
       });
