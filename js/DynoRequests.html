@@ -10,17 +10,17 @@
   <script type='text/javascript' src='http://code.highcharts.com/highcharts.js'></script>
   <script type='text/javascript'>
 
-    var src = 'https://api.haptava.io/public/versly/queries/7811800f-e892-4de9-9204-71053ff2a06f';
-    var reloadWaitTime = 5000;
-    var chart;
+    var src = 'https://api.haptava.io/public/versly/queries/heroku_dyno_request_rate',
+        reloadWaitTime = 5000,
+        chart;
 
     function queryData() {
       $.ajax({
         url: src,
         success: function (json) {
 
-          var reload = false;
-          var skip = false;
+          var reload = false,
+              skip = false;
 
           if (json.exceptionName != undefined) {
             skip = true;
