@@ -4,7 +4,7 @@
 
 package io.haptava.examples.heroku.servlets;
 
-import com.sudothought.properties.ConfigurationException;
+import com.sudothought.config.ConfigurationException;
 import com.sudothought.util.TimeUtils;
 import com.sudothought.util.Utils;
 import io.haptava.api.common.LauncherException;
