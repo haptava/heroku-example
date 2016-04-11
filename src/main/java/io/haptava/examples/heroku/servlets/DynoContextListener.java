@@ -26,18 +26,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static io.haptava.examples.heroku.Constants.ADMIN_OBJECT_NAME;
-import static io.haptava.examples.heroku.Constants.DYNO_NAME;
-import static io.haptava.examples.heroku.Constants.DYNO_PROXY;
-import static io.haptava.examples.heroku.Constants.DYNO_WATCHER_JMX_PROXY;
-import static io.haptava.examples.heroku.Constants.DYNO_WATCHER_MBEAN_PROXY;
-import static io.haptava.examples.heroku.Constants.MBEANSERVER_ADMIN_PROXY;
-import static io.haptava.examples.heroku.Constants.RETRY_SECS;
-import static io.haptava.examples.heroku.Constants.USERGROUP_JMX_PROXY;
-import static io.haptava.examples.heroku.Constants.getApplicationId;
-import static io.haptava.examples.heroku.Constants.getDynoMBeanObjectName;
-import static io.haptava.examples.heroku.Constants.getDynoWatcherLauncherName;
-import static io.haptava.examples.heroku.Constants.getDynoWatcherMBeanObjectName;
+import static io.haptava.examples.heroku.Constants.*;
 import static java.lang.String.format;
 
 public class DynoContextListener
@@ -103,7 +92,7 @@ public class DynoContextListener
                    System.out.println("DynoContextListener shutdown hook invoked");
                    cleanUp();
                    // Call launcher shutdown hook actions disabled above
-                   launcher.invokeShutDownHookActions();
+                   launcher.onShutDownHookInvoked();
                  }
                });
 
